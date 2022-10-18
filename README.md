@@ -26,7 +26,9 @@ You will need the following things correctly installed on your computer.
 curl 'http://localhost:8000' -H 'Content-Type: application/json' -H 'Accept: application/json' --data-binary '{"query":"{movie(id: 550) { title, productionCompany { homepage }}}"}' | json_pp
 ```
 
+## How to test
 
+You could test and see the results using [GraphiQL Chrome Extension](https://chrome.google.com/webstore/detail/graphiql-extension/jhbedfdjpmemmbghfecnaeeiokonjclb/related)
 
 ## API
 
