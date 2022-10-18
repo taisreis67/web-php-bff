@@ -10,8 +10,6 @@ use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
 use WebPhpBff\DataSources\Movie;
 
-$movie = new Movie();
-
 $movieType = new ObjectType([
   'name' => 'movie',
   'fields' => [
@@ -32,9 +30,9 @@ $queryType = new ObjectType([
   'fields' => [
     'movie' => [
       'type' => $movieType,
-      'resolve' => function ($rootValue, array $args) use ($movie): array {
-        $movie->getMovie(550);
-        return $movie;
+      'resolve' => function ($rootValue, array $args): object {
+        $movie = new Movie();
+        return $movie->getMovie(550);
       },
     ],
   ],
@@ -49,3 +47,6 @@ $server = new StandardServer([
 ]);
 
 $server->handleRequest();
+
+// curl 'http://localhost:8000' -H 'Content-Type: application/json' -H 'Accept: application/json' --data-binary '{"query":"{movie { title }}"}'
+// {"data":{"movie":{"title":"Fight Club"}}}

@@ -22,6 +22,8 @@ class Movie {
     $this->overview = $response['overview'];
 
     curl_close($curl);
+
+    return $this;
   }
 }
 
