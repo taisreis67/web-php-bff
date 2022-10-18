@@ -9,6 +9,25 @@ use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
 use WebPhpBff\DataSources\Movie;
+use WebPhpBff\DataSources\ProductionCompany;
+
+$productionCompanyType = new ObjectType([
+  'name' => 'productionCompany',
+  'fields' => [
+    'id' => [
+      'type' => Type::id(),
+    ],
+    'name' => [
+      'type' => Type::string(),
+    ],
+    'homepage' => [
+        'type' => Type::string(),
+    ],
+    'description' => [
+      'type' => Type::string(),
+    ],
+  ],
+]);
 
 $movieType = new ObjectType([
   'name' => 'movie',
@@ -21,6 +40,9 @@ $movieType = new ObjectType([
     ],
     'overview' => [
         'type' => Type::string(),
+    ],
+    'productionCompany' => [
+      'type' => Type::listOf($productionCompanyType),
     ],
   ],
 ]);
@@ -36,7 +58,14 @@ $queryType = new ObjectType([
         ]
       ],
       'resolve' => function ($rootValue, array $args): array {
-        return Movie::findMovie($args['id']);
+        $movie = Movie::findMovie($args['id']);
+
+        foreach($movie['production_companies'] as $movieProductionCompany) {
+          $productionCompany = ProductionCompany::findProductionCompany($movieProductionCompany['id']);
+          $movie['productionCompany'][] = $productionCompany;
+        }
+
+        return $movie;
       },
     ],
     'movies' => [
