@@ -8,10 +8,12 @@ use GraphQL\Server\StandardServer;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
-use MyMovieBFF\DataSource\Movie;
+use WebPhpBff\DataSources\Movie;
+
+$movie = new Movie();
 
 $movieType = new ObjectType([
-  'name' => 'Movie',
+  'name' => 'movie',
   'fields' => [
     'id' => [
       'type' => Type::id(),
@@ -30,22 +32,17 @@ $queryType = new ObjectType([
   'fields' => [
     'movie' => [
       'type' => $movieType,
-      'resolve' => function ($rootValue, array $args) {
-        return [
-          'id' => 123,
-          'title' => 'chuchu',
-          'overview' => 'chuchu chu'
-        ]
+      'resolve' => function ($rootValue, array $args) use ($movie): array {
+        $movie->getMovie(550);
+        return $movie;
       },
     ],
   ],
 ]);
 
-$schema = new Schema(
-  [
-      'query' => $queryType,
-  ]
-);
+$schema = new Schema([
+  'query' => $queryType,
+]);
 
 $server = new StandardServer([
   'schema' => $schema,

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MyMovieBFF\DataSource
+namespace WebPhpBff\DataSources;
 
 class Movie {
   public ?int $id = null;

@@ -1,13 +1,17 @@
 {
     "name": "taisduarte/web-php-bff",
     "require": {
-        "webonyx/graphql-php": "^14.11",
-        "guzzlehttp/guzzle": "^7.5"
+        "webonyx/graphql-php": "^14.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "WebPhpBff\\": "src/"
+        }
     },
     "authors": [
         {
             "name": "Tais Duarte",
-            "email": "taisrsduarte@gmail.com"
+            "email": "tais.duarte@creditas.com.br"
         }
     ]
 }
