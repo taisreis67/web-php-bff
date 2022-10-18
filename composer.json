@@ -1,0 +1,13 @@
+{
+    "name": "taisduarte/web-php-bff",
+    "require": {
+        "webonyx/graphql-php": "^14.11",
+        "guzzlehttp/guzzle": "^7.5"
+    },
+    "authors": [
+        {
+            "name": "Tais Duarte",
+            "email": "taisrsduarte@gmail.com"
+        }
+    ]
+}
