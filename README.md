@@ -1,6 +1,6 @@
 # Web PHP BFF
 
-A backend-for-frontend application used to demonstrate how build one using PHP and GraphQL.
+A backend-for-frontend application used to demonstrate how to build one using PHP and GraphQL.
 
 ## Requirements
 
