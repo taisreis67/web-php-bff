@@ -20,6 +20,14 @@ You will need the following things correctly installed on your computer.
 
 - `php -S localhost:8000 src/graphql.php`
 
+## How make requests
+
+```json
+curl 'http://localhost:8000' -H 'Content-Type: application/json' -H 'Accept: application/json' --data-binary '{"query":"{movie(id: 550) { title, productionCompany { homepage }}}"}' | json_pp
+```
+
+
+
 ## API
 
 The BFF is consuming a public API called [TMDB (The Movie Database API)](https://developers.themoviedb.org/3/getting-started/introduction) 3v.
