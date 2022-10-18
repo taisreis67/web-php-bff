@@ -30,9 +30,19 @@ $queryType = new ObjectType([
   'fields' => [
     'movie' => [
       'type' => $movieType,
-      'resolve' => function ($rootValue, array $args): object {
-        $movie = new Movie();
-        return $movie->getMovie(550);
+      'args' => [
+        'id' => [
+          'type' => Type::int(),
+        ]
+      ],
+      'resolve' => function ($rootValue, array $args): array {
+        return Movie::findMovie($args['id']);
+      },
+    ],
+    'movies' => [
+      'type' => Type::listOf($movieType),
+      'resolve' => function ($rootValue, array $args): array {
+        return Movie::getPopularMovies();
       },
     ],
   ],
@@ -47,6 +57,3 @@ $server = new StandardServer([
 ]);
 
 $server->handleRequest();
-
-// curl 'http://localhost:8000' -H 'Content-Type: application/json' -H 'Accept: application/json' --data-binary '{"query":"{movie { title }}"}'
-// {"data":{"movie":{"title":"Fight Club"}}}
