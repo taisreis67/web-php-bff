@@ -52,6 +52,7 @@ $queryType = new ObjectType([
   'fields' => [
     'movie' => [
       'type' => $movieType,
+      'description' => 'Returns the movie details',
       'args' => [
         'id' => [
           'type' => Type::int(),
@@ -68,8 +69,9 @@ $queryType = new ObjectType([
         return $movie;
       },
     ],
-    'movies' => [
+    'popularMovies' => [
       'type' => Type::listOf($movieType),
+      'description' => 'Returns the most popular movies at the moment',
       'resolve' => function ($rootValue, array $args): array {
         return Movie::getPopularMovies();
       },
